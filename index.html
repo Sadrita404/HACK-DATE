@@ -112,6 +112,114 @@ body {
     padding: 58px 14px 8px 14px;
 }
 
+.page-title-group {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.page-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    stroke-width: 1.8;
+}
+
+.page-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.nbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 28px;
+    padding: 0 8px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    white-space: nowrap;
+    text-decoration: none;
+    line-height: 1;
+}
+.nbtn:hover { background-color: var(--bg-hover); color: var(--text); }
+.nbtn:active { background-color: var(--bg-active); }
+.nbtn:icon-only { width: 28px; padding: 0; }
+.nbtn svg { width: 14px; height: 14px; stroke-width: 2; flex-shrink: 0; }
+.nbtn.today-btn { color: var(--accent); background-color: var(--accent-bg); font-weight: 600; font-size: 12px; }
+.nbtn.today-btn:hover { background-color: var(--accent-border); }
+ 
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 14px 10px;
+}
+
+.month-picker-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: var(--font);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color var(--dur) var(--ease);
+    letter-spacing: -0.2px;
+}
+.month-picker-trigger:hover { background-color: var(--bg-hover); }
+.month-picker-trigger svg { width: 13px; height: 13px; color: var(--text-muted); stroke-width: 2; } 
+
+.nav-group { display: flex; align-items: center; gap: 2px; }
+
+.month-year-picker-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+    padding-top: 100px;
+}
+.month-year-picker-overlay.open { display: flex; }
+
+.picker-card {
+    background-color: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    width: 280px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    overflow: hidden;
+    animation: pop-in 0.16s var(--ease) both;
+}
+
+@keyframes pop-in {
+    from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 </style>
 </head>    
 </html>
