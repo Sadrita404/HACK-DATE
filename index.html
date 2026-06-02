@@ -59,6 +59,59 @@
     --cal-today-color: #ff6369;
     --cal-day-bg: rgba(255,255,255,0.04)
 }
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 16px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg-secondary);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-root {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+@media (min-width:481px) {
+    .app-root { box-shadow: 0 0 0 1px var(--border), 0 8px 40px rgba(0,0,0,0.1); }
+}
+
+.hack-flag {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    width: 68px;
+    z-index: 200;
+    pointer-events: auto;
+}
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 58px 14px 8px 14px;
+}
+
 </style>
 </head>    
 </html>
