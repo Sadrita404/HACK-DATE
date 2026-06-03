@@ -220,6 +220,67 @@ body {
     to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+.picker-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.picker-year-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.picker-year-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    min-width: 36px;
+    text-align: center;
+    font-family: var(--font-mono);
+}
+
+.picker-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: background-color var(--dur);
+}
+.picker-close:hover { background-color: var(--bg-hover); color: var(--text); }
+.picker-close svg { width: 14px; height: 14px; stroke-width: 2; }
+
+.picker-months-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 12px;
+}
+
+.picker-month-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); 
+}
 </style>
 </head>    
 </html>
