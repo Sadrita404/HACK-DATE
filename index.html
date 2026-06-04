@@ -398,6 +398,46 @@ body {
     z-index: 10;
 }
 
+.feed-date-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-family: var(--font-mono);
+}
+
+.event-count-pill {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: var(--bg-hover);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+}
+
+.event-list {
+    padding: 12px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    animation: card-in 0.18s var(--ease) both; 
+}
+@keyframes cars-in {
+    from { opacity:0; transform:translateY(8px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+.event-card:hover { border-color: var(--border-strong); box-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+
 </style>
 </head>    
 </html>
