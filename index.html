@@ -756,6 +756,70 @@
         stroke-width: 2.5;
         flex-shrink: 0;
       }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 24px;
+        text-align: center;
+        gap: 6px;
+      }
+      .empty-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background-color: var(--bg-hover);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
+      .empty-icon svg {
+        width: 22px;
+        height: 22px;
+        color: var(--text-muted);
+        stroke-width: 1.5;
+      }
+      .empty-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+      .empty-body {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        line-height: 1.55;
+        max-width: 220px;
+      }
+
+      .loading-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        gap: 12px;
+      }
+      .loader-dots {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+      .ldot {
+        width: 5px;
+        height: 5px;
+        border: 50%;
+        background-color: var(--text-muted);
+        animation: ldot-bounce 1.1s ease-in-out infinite;
+      }
+      .ldot:nth-child(2) {
+        animation-delay: 0.14s;
+      }
+      .ldot:nth-child(3) {
+        animation-delay: 0.28s;
+      }
     </style>
   </head>
   <body>
