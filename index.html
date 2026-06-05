@@ -820,6 +820,43 @@
       .ldot:nth-child(3) {
         animation-delay: 0.28s;
       }
+      @keyframes ldot-bounce {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.35;
+        }
+        30% {
+          transform: translateY(-5px);
+          opacity: 1;
+        }
+      }
+      .loading-text {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+      }
+
+      .app-footer {
+        background-color: var(--bg);
+        border-top: 1px solid var(--border);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .footer-text {
+        font-size: 10.5px;
+        color: var(--text-faint);
+        font-family: var(--font-mono);
+        letter-spacing: 0.2px;
+      }
+      .footer-heart {
+        color: var(--accent);
+        font-size: 11px;
+      }
     </style>
   </head>
   <body>
