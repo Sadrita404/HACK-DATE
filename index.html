@@ -1018,6 +1018,89 @@
         </div>
           <div class="days-grid" id="daysGrid"></div>
       </div>
+
+      <div class="feed-area">
+        <div class="feed-header-block">
+          <span class="feed-date-label" id="feedDateLabel">Loading...</span>
+          <span
+            class="event-count-pill"
+            id="eventCountPill"
+            style="display: none"></span>
+        </div>
+        <div class="events-list" id="eventList">
+          <div class="Loading-wrap">
+            <div class="loader-dots">
+              <div class="ldot"></div>
+              <div class="ldot"></div>
+              <div class="ldot"></div>
+            </div>
+            <span class="loading-text">fetching events....</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <span class="footer-text">by Sadrita</span>
+        <span class="footer-heart">&#9829</span>
+        <span class="footer-text">Hack Club Events</span>
+      </footer>
     </div>
+    
+    <script>
+      let pivotDate = new Date();
+      let selectedDate = new Date();
+      let allEvents = [];
+      let eventsMap = {};
+      let pickerYear = new Date().getFullYear();
+
+      const API = "https://events.hackclub.com/api/events/all/";
+      const MONTHS_LONG = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+        ];
+        const MONTHS_LONG = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+          ];
+          const WEEKDAYS_LONG = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            ];
+
+            function zeroPad(n) {
+              return String(n).padStart(2, "0");
+            }
+            function dateKey(d) {
+              return `${d.getFullYear()}-${zeroPad(d.getMonth() + 1)}-${zeroPad(
+                d.getDate()
+                )}`;
+            }
+            
+    </script>
   </body>
 </html>
