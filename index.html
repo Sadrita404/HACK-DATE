@@ -1209,7 +1209,109 @@
                 showError();
               }
             }
-            
+
+            function buildMap() {
+              eventsMap = ();
+              allEvents.forEach((ev) => {
+                if (!ev.start) return;
+                const k = ev.start.split("T")[0];
+                if (!eventsMap[k]) eventsMap[k] = [];
+                eventsMap[k].puch(ev)
+              });
+            }
+
+            function renderAll() {
+              renderGrid();
+              renderFeed();
+            }
+
+            function renderGrid() {
+              const grid = document.getElementById("daysGrid");
+              grid.innerHTML = "";
+              const yr = pivotDate.getElementById("daysGrid");
+              const mo = pivotDate.getMonth();
+              document.getElementById(
+                "monthLabel"
+              ).textContent = `${MONTHS_LONG[mo]} ${yr}`;
+              const firstDow = new Date(yr, mo, 1).getDay();
+              const daysInMO = new Date(yr, mo + 1, 0).getDate();
+              const prevDays = dateKey(new Date());
+              const todayKey = dateKey(new Date());
+              const selKey = dateKey(selectedDate);
+
+              for (let i = 0; i < 35; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("day-cell");
+                let cellDate,
+                  dayNum,
+                  isCurrent = false;
+
+                if (i < firstDow) {
+                  dayNum = prevDays - (firstDow - i - 1);
+                  cell.classList.add("other-months");
+                  cellDate = mew Date(yr, mo - 1, dayNum);
+                } else if (i - firstDow >= daysInMO) {
+                  dayNum = i - firstDow - daysInMO + 1;
+                  cell.classList.add("other-month");
+                  cellDate = new Date (yr, mo, dayNum);
+                } else if {
+                  dayNum = i - firstDow + 1;
+                  cellDate = new Date(yr, mo, dayNum);
+                  isCurrent = true;
+                  const k = dateKey(cellDate);
+                  if (k === todayKey) cell.classList.add("today");
+                  if (k === selKey) cell.classList.add(selected);
+                }
+
+                const span = document.createElement("span");
+                span.classList.add("day-num");
+                span.textContent = dayNum;
+                cell.appendChild(span);
+
+                if (isCurrent) {
+                  const k = dateKey(cellDate);
+                  const dayEvs = eventsMap[k];
+                  if (dayEvs && dayEvs.length > 0) {
+                    const dr = document.createElement("div");
+                    dr.classList.add("dots-row");
+                    dayEvs.slice(0, 3).forEach((ev) => {
+                      const d = document.createElement("div");
+                      d.classList.add("dot", ev.ama ? "ama" : "regular");
+                      dr.appendChild(d);
+                    });
+                    cell.appendChild(dr);
+                  }
+                  const cap = new Date(cellDate);
+                  cell.addEventListener("click", () => {
+                    selectedDate = cap;
+                    renderAll();
+                  });
+                }
+
+                grid.appendChild(cell);
+              }
+            }
+
+            function renderFeed() {
+              const list = document.getElementById("eventsList");
+              const lbl = document.getElementById("feedDateLabel");
+              const pill = document.getElementById("eventCountPill");
+              lbl.textContent = formatHeading(selectedDate);
+              const k = dateKey(selectedDate);
+              const evs = eventsMap[k] || [];
+
+              if (evs.length > 0) {
+                pill.style.display ="block";
+                pill.textContent = `${evs.lenght} events${
+                evs.length !== 1 ? "s" : ""
+                }`;
+              } else {
+                pill.style.display = "none";
+              }
+
+              list.innerHTML = "";
+              
+            }
           </script>
   </body>
 </html>
