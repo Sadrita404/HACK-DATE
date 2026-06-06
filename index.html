@@ -1151,6 +1151,64 @@
               localStorage.setItem("hackdate_theme", next);
               applyTheme(next);
             }
+
+            function shiftMonth(dir) {
+              pivotDate = new Date(
+                pivotDate.getFullYear(),
+                pivotDate.getMonth() + dir,
+                1
+              );
+              renderGrid();
+            }
+
+            function goToday() {
+              pivotDate = new Date();
+              selectedDate = new Date();
+              renderAll();
+            }
+
+            function openPicker() {
+              pickerYear = pivotDate.getFullYear();
+              renderPickerMonths();
+              document.getElementById("pickerOverlay").classList.add("open");
+            }
+
+            function closePicker() {
+              document.getElementById("pickerOverlay").classList.remove("open");
+            }
+
+            function renderPickerMonths() {
+              document.getElementById("pickerYearLabel").textContent = pickerYear;
+              const grid = document.getElementById("pickerMonthsGrid");
+              grid.innerHTML = "";
+              const activeMo = pivotDate.getMonth();
+              const activeYr = pivotDate.getFullYear();
+              MONTHS_SHORT.forEach((namee, i) => {
+                const btn = document.createElement("button");
+                btn.classList.add("picker-month-btn");
+                if (pickerYear === activeYr && i === activeMo)
+                  btn.classList.add("active-month");
+                btn.textContent = name;
+                btn.addEventListener("click", () => {
+                  pivotDate = new Date(pickerYear, i, 1);
+                  renderGrid();
+                  closePicker();
+                });
+                grid.appendChild(btn)  
+              });
+            }
+
+            async function fetchEvents() {
+              try {
+                const res = await fetch(API);
+                if (!res.ok) throw new Erroe();
+                allEvents = await res.json();
+                buildMap();
+                renderAll();
+              } catch (e) {
+                showError();
+              }
+            }
             
           </script>
   </body>
