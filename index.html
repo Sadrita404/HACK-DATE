@@ -1100,7 +1100,58 @@
                 d.getDate()
                 )}`;
             }
+
+            function formatTime(iso) {
+              if (!iso || !iso.includes("T")) return "Time TBD";
+              const t = iso.split("T")[1];
+              if (!t) return "Time TBD";
+              const [hh, mm] = t.split(":");
+              const h = parseInt(hh, 10);
+              return `${h % 12 || 12}:${mm} ${h >=12 ? "PM" : "AM"} UTC`;
+            }
+
+            function formatHeading(d) {
+              const tk = dateKey(new Date());
+              const sk = dateKey(d);
+              const prefix = sk === tk ? "Today \u2014 " : "";
+              return `${prefix}${WEEKDAYS_LONG[d.getDay()]}, ${
+              MONTHS_LONG[d.getMonth()]
+              } ${d.getDate()}, ${d.getFullYear()}`;
+            }
+
+            function cleanDesc(text) {
+              if (!text) return "";
+              return text
+                .replace(/\[([^\]]+)\([^)]+\)/g, "$1")
+                .replace(/!\[([^]]*\([^])+\))/g, "")
+                .replace(/\*\*([^*]+)\*\*/g, "$1")
+                .replace(/\*[^*]+)\*/g, "$1")
+                .replace(/`([^`]+)`/g, "$1")
+                .replace(/#+\s/g, "")
+                .replace(/\n{3,}/g, "\n\n")
+                .trim();
+            }
+
+            function initTheme() {
+              const saved = localStorage.getItem("hackdate_theme") || "light";
+              applyTheme(saved);
+            }
             
-    </script>
+            function applyTheme(theme) {
+              document.documentElement.setAttribute("data-theme", theme);
+              document.getElementById("iconSun").style.display =
+                theme === "dark" ? "block" : "none";
+              document.getElementById("iconMoon").style.display =
+                theme === "dark" ? "none" : "block"
+            }
+
+            function toggleTheme() {
+              const cur = document.documentElement.getAttribute("data-theme");
+              const next = cur === "dark" ? "light" : "dark";
+              localStorage.setItem("hackdate_theme", next);
+              applyTheme(next);
+            }
+            
+          </script>
   </body>
 </html>
