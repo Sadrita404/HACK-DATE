@@ -10,7 +10,7 @@
   [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
   [![HTML5](https://img.shields.io/badge/Language-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
   [![Architecture](https://img.shields.io/badge/Type-Web__Wrapper-blueviolet?style=for-the-badge)](https://developer.android.com/reference/android/webkit/WebView)
-  [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge)](LICENSE)
 
   ---
 
@@ -175,6 +175,6 @@ Contributions are what make the open-source community such an amazing place to l
 4. **Push** to the Branch (`git push origin feature/AmazingFeature`)
 5. **Open a Pull Request**
 
-I will gladly review your changes and merge them into the project. Thank you for helping make this app even better! 
+I will gladly review your changes and merge them into the project. Thank you for helping make this app even better.
 
 <a href="https://hackclub.com/"><img style="position: absolute; top: 0; left: 10px; border: 0; width: 256px; z-index: 999;" src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club"/></a>
