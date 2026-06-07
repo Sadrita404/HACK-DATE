@@ -1013,8 +1013,8 @@
 
       <div class="calendar-section">
         <div class="weekday-row">
-          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span
-          ><span>Th</span><span>Fr</span><span>Sa</span>
+          <span>SuN</span><span>MoN</span><span>Tue</span><span>We</span
+          ><span>Thu</span><span>Fri</span><span>Sat</span>
         </div>
         <div class="days-grid" id="daysGrid"></div>
       </div>
@@ -1310,23 +1310,23 @@
         }
 
         list.innerHTML = "";
-        
-        if (evs.length ===0) {
+
+        if (evs.length === 0) {
           const todayKey2 = dateKey(new Date());
           const selKey2 = dateKey(selectedDate);
           list.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">
-              <svg xmlns="https://www.w3.org/200/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="12" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </div>
-            <div class="empty-title">${
-              todayKey2 === selKey2 ? "No events today" : "Nothing scheduled"
-            }</div>
-            <div class="empty-body">No Hack Club events on this day. Tap another date to explore.</div>
-          </div>`;
-            return;
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="empty-title">${
+          todayKey2 === selKey2 ? "No events today" : "Nothing scheduled"
+        }</div>
+        <div class="empty-body">No Hack Club events on this day. Tap another date to explore.</div>
+      </div>`;
+          return;
         }
 
         const todayKey3 = dateKey(new Date());
@@ -1334,14 +1334,14 @@
         if (todayKey3 === selKey3) {
           const bar = document.createElement("div");
           bar.classList.add("today-bar");
-          bar.innerHTML = `<svg xlmns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><svg>Today`;
-          list.appendChild(bar);  
+          bar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Today`;
+          list.appendChild(bar);
         }
 
         evs.forEach((ev, idx) => {
           const card = document.createElement("div");
           card.classList.add("event-card");
-          card.style.animationDelay = `${idx * 0.05}`;
+          card.style.animationDelay = `${idx * 0.05}s`;
 
           const desc = cleanDesc(ev.desc);
           const timeStr = formatTime(ev.start);
@@ -1350,47 +1350,47 @@
 
           let avatarHTML;
           if (avatarSrc) {
-            avatarHTML = ``;
+            avatarHTML = `<div class="card-avatar"><img src="${avatarSrc}" alt="" onerror="this.parentElement.innerHTML='<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\'><path d=\\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\\'/><circle cx=\\'12\\' cy=\\'7\\' r=\\'4\\'/></svg>'"/></div>`;
           } else {
-            avatarHTML = ``;
+            avatarHTML = `<div class="card-avatar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
           }
 
           const badge = isAma
             ? `<span class="ptag ama">AMA</span>`
             : `<span class="ptag ev">Event</span>`;
 
-            let actionsHTML = "";
-            if (ev.cal || ev.youtube) {
-              actionsHTML = `<div class="card-aactions">`;
-                if (ev.cal)
-                  actionsHTML += ``;
-                  if (ev.youtube)
-                    actionsHTML += ``;
-                  actionsHTML += '</div>'  
-            }
+          let actionsHTML = "";
+          if (ev.cal || ev.youtube) {
+            actionsHTML = `<div class="card-actions">`;
+            if (ev.cal)
+              actionsHTML += `<a href="${ev.cal}" target="_blank" class="cta-btn primary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Add to calendar</a>`;
+            if (ev.youtube)
+              actionsHTML += `<a href="${ev.youtube}" target="_blank" class="cta-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Watch</a>`;
+            actionsHTML += `</div>`;
+          }
 
-            card.innerHTML = `
-        <div class="card-inner">
-          <div class="card-top">
-            ${avatarHTML}
-            <div class="card-title-col">
-              <div class="card-event-name">${ev.title || "Untitled Event"}</div>
-              <div class="card-leader-row">    
-                <span class="card-leader-name">${ev.leader || "Hack Club"}</span>
-                <span class="card-sep=dot"></span>
-                <div class="card-time-chip">
-                  <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  ${timeStr}
-                </div>
+          card.innerHTML = `
+      <div class="card-inner">
+        <div class="card-top">
+          ${avatarHTML}
+          <div class="card-title-col">
+            <div class="card-event-name">${ev.title || "Untitled Event"}</div>
+            <div class="card-leader-row">
+              <span class="card-leader-name">${ev.leader || "Hack Club"}</span>
+              <span class="card-sep-dot"></span>
+              <div class="card-time-chip">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${timeStr}
               </div>
             </div>
           </div>
-          ${desc ? `<div class="card-desc">${desc}</div>` : ""}
-          <div class="card-tags-row">${badge}</div>
-          ${actionsHTML}  
-        </div>`;
-        
-        list.appendChild(card);
+        </div>
+        ${desc ? `<div class="card-desc">${desc}</div>` : ""}
+        <div class="card-tags-row">${badge}</div>
+        ${actionsHTML}
+      </div>`;
+
+          list.appendChild(card);
         });
       }
 
@@ -1398,13 +1398,13 @@
         document.getElementById("eventsList").innerHTML = `
     <div class="empty-state">
       <div class="empty-icon" style="background-color:var(--accent-bg);">
-        <svg xmlns="https://www.w3.org./2000/svg" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
       </div>
       <div class="empty-title">Failed to load events</div>
       <div class="empty-body">Could not reach the Hack Club events API. Check your connection.</div>
-    </div>`;        
+    </div>`;
       }
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -1416,7 +1416,7 @@
           .getElementById("prevBtn")
           .addEventListener("click", () => shiftMonth(-1));
         document
-          .getElementById("nexBtn")
+          .getElementById("nextBtn")
           .addEventListener("click", () => shiftMonth(1));
         document.getElementById("todayBtn").addEventListener("click", goToday);
         document
@@ -1424,8 +1424,8 @@
           .addEventListener("click", openPicker);
         document
           .getElementById("pickerClose")
-          .addEventListener("click", closePicker);  
-        document 
+          .addEventListener("click", closePicker);
+        document
           .getElementById("pickerOverlay")
           .addEventListener("click", (e) => {
             if (e.target === document.getElementById("pickerOverlay"))
@@ -1435,12 +1435,12 @@
           pickerYear--;
           renderPickerMonths();
         });
-        document.getElementById(yearNextBtn).addEventListener("click", () => {
+        document.getElementById("yearNextBtn").addEventListener("click", () => {
           pickerYear++;
           renderPickerMonths();
-        })
+        });
         fetchEvents();
       });
-     </script>
+    </script>
   </body>
 </html>
