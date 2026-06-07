@@ -14,13 +14,12 @@
 
   ---
 
-  <p align="center">
-    <a href="#-features">Features</a> •
-    <a href="#-installation">Installation</a> •
-    <a href="#-web-view-configuration">WebView Config</a> •
-    <a href="#-screenshots">Screenshots</a> •
-    <a href="#-license">License</a>
-  </p>
+ <p align="center">
+  <a href="#-features">Features</a> •
+  <a href="https://github.com/Sadrita404/HACK-DATE/releases/tag/V1">Installation</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="https://github.com/Sadrita404/HACK-DATE/blob/main/LICENSE">License</a>
+</p>
 
 </div>
 
@@ -61,10 +60,15 @@ Made By - Sadrita in [Excalidraw](https://excalidraw.com/)
 
 ---
 
-## Features
-* Shows all Hack Club all events Ever.
-* Show Date 
-* We can add the Events to our Google Calendar
+<div id="-features">
+
+##  Features
+
+* **Complete Archive:** Explore every single Hack Club event ever hosted, all in one place.
+* **Live Schedules:** Instantly view active dates and upcoming event timelines.
+* **Calendar Integration:** Seamlessly add events directly to your personal Google Calendar with a single click.
+
+</div>
 
 ---
 ## API Setup 
@@ -138,7 +142,7 @@ A simple JSON API to events on this site.
 ---
 
 
-<div align="center">
+<div id="-screenshots" align="center">
   <h3> App Screenshots</h3>
 
   <table>
