@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Plus+Jakarta+Sans:ital,wght@0,700;1,700&family=Share+Tech+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet" />
     <style>
       :root {
@@ -32,7 +32,7 @@
         --cal-selected-text: #ffffff;
         --cal-today-color: #eb5757;
         --cal-day-bg: rgba(55, 53, 47, 0.04);
-        --font: "DM Sans", monospace;
+        --font: "DM Sans", -apple-system, sans-serif;
         --font-mono: "DM Mono", monospace;
         --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         --dur: 0.15s;
@@ -79,7 +79,7 @@
 
       body {
         font-family: var(--font);
-        background: var(--bg-secondary);
+        background-color: var(--bg-secondary);
         color: var(--text);
         min-height: 100vh;
         display: flex;
@@ -181,7 +181,7 @@
       .nbtn:active {
         background-color: var(--bg-active);
       }
-      .nbtn:icon-only {
+      .nbtn.icon-only {
         width: 28px;
         padding: 0;
       }
@@ -275,7 +275,7 @@
         }
       }
 
-      .picker-card {
+      .picker-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -354,7 +354,7 @@
         font-weight: 600;
       }
 
-      .calender-section {
+      .calendar-section {
         background-color: var(--bg);
         padding: 8px 10px 12px;
         border-bottom: 1px solid var(--border);
@@ -447,7 +447,7 @@
       .day-cell.selected .dot {
         background-color: rgba(255, 255, 255, 0.45) !important;
       }
-      [data-theme="dark"] .dev-cell.selected .dot {
+      [data-theme="dark"] .day-cell.selected .dot {
         background-color: rgba(0, 0, 0, 0.35) !important;
       }
 
@@ -521,7 +521,7 @@
         font-family: var(--font-mono);
       }
 
-      .event-list {
+      .events-list {
         padding: 12px 14px 16px;
         display: flex;
         flex-direction: column;
@@ -537,7 +537,7 @@
           box-shadow var(--dur) var(--ease);
         animation: card-in 0.18s var(--ease) both;
       }
-      @keyframes cars-in {
+      @keyframes card-in {
         from {
           opacity: 0;
           transform: translateY(8px);
@@ -549,7 +549,7 @@
       }
       .event-card:hover {
         border-color: var(--border-strong);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       }
 
       .card-inner {
@@ -602,7 +602,7 @@
         font-size: 14px;
         font-weight: 600;
         color: var(--text);
-        line-height: 1.3;
+        line-height: 1.35;
         letter-spacing: -0.1px;
       }
 
@@ -712,8 +712,8 @@
         cursor: pointer;
         text-decoration: none;
         transition: background-color var(--dur) var(--ease),
-          border-color var(--dur) var(--ease), color var(--dur) var(--ease); 
-        white-space: nowrap;  
+          border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+        white-space: nowrap;
       }
       .cta-btn:hover {
         background-color: var(--bg-hover);
@@ -810,7 +810,7 @@
       .ldot {
         width: 5px;
         height: 5px;
-        border: 50%;
+        border-radius: 50%;
         background-color: var(--text-muted);
         animation: ldot-bounce 1.1s ease-in-out infinite;
       }
@@ -861,7 +861,7 @@
   </head>
   <body>
     <div class="app-root">
-      <a href="https://hackclub.com/" target="_blank" style="display: block;">
+      <a href="https://hackclub.com/" target="_blank" style="display: block">
         <img
           class="hack-flag"
           src="https://assets.hackclub.com/flag-orpheus-top.svg"
@@ -872,8 +872,8 @@
         <div class="header-top">
           <div class="page-title-group">
             <div class="page-icon">
-              <svg 
-                xmlns="https://www.w3.org/2000/svg"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -888,19 +888,19 @@
             <span class="page-title">Hack Date</span>
           </div>
           <div class="header-actions">
-            <button 
+            <button
               class="nbtn icon-only"
               id="themeBtn"
               aria-label="Toggle theme">
-              <svg 
+              <svg
                 id="iconSun"
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                style="display: none;">
+                style="display: none">
                 <circle cx="12" cy="12" r="4.5" />
                 <line x1="12" y1="2" x2="12" y2="4" />
                 <line x1="12" y1="20" x2="12" y2="22" />
@@ -908,12 +908,12 @@
                 <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
                 <line x1="2" y1="12" x2="4" y2="12" />
                 <line x1="20" y1="12" x2="22" y2="12" />
-                <line x1-="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
               </svg>
               <svg
                 id="iconMoon"
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -927,9 +927,9 @@
 
         <div class="header-nav">
           <button class="month-picker-trigger" id="monthPickerTrigger">
-            <span id="monthLabel">June 2026</span>
-            <svg 
-              xmlns="https://www.w3.org/2000/svg"
+            <span id="monthLabel">May 2025</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -939,9 +939,9 @@
             </svg>
           </button>
           <div class="nav-group">
-            <button class="nbtn icon-only" id="preBtn">
+            <button class="nbtn icon-only" id="prevBtn">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -950,10 +950,10 @@
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
-            <button class="nbtn today-btn" id="today-Btn">Today</button>
+            <button class="nbtn today-btn" id="todayBtn">Today</button>
             <button class="nbtn icon-only" id="nextBtn">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -965,14 +965,14 @@
           </div>
         </div>
       </header>
-      
+
       <div class="month-year-picker-overlay" id="pickerOverlay">
         <div class="picker-card" id="pickerCard">
           <div class="picker-header">
             <div class="picker-year-nav">
               <button class="nbtn icon-only" id="yearPrevBtn">
                 <svg
-                  xmlns="https://www.w3.org/2000/svg"
+                  xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -981,10 +981,10 @@
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
-              <span class="picker-year-label" id="pickerYearLabel">2026</span>
+              <span class="picker-year-label" id="pickerYearLabel">2025</span>
               <button class="nbtn icon-only" id="yearNextBtn">
                 <svg
-                  xmlns="https://www.w3.org/2000/svg"
+                  xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -996,7 +996,7 @@
             </div>
             <button class="picker-close" id="pickerClose">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -1007,16 +1007,16 @@
               </svg>
             </button>
           </div>
-            <div class="picker-months-grid" id="pickerMonthsGrid"></div>
+          <div class="picker-months-grid" id="pickerMonthsGrid"></div>
         </div>
       </div>
-      
+
       <div class="calendar-section">
         <div class="weekday-row">
-          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span
-            ><span>Thu</span><span>Fri</span><span>Sat</span>
+          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span
+          ><span>Th</span><span>Fr</span><span>Sa</span>
         </div>
-          <div class="days-grid" id="daysGrid"></div>
+        <div class="days-grid" id="daysGrid"></div>
       </div>
 
       <div class="feed-area">
@@ -1027,25 +1027,25 @@
             id="eventCountPill"
             style="display: none"></span>
         </div>
-        <div class="events-list" id="eventList">
-          <div class="Loading-wrap">
+        <div class="events-list" id="eventsList">
+          <div class="loading-wrap">
             <div class="loader-dots">
               <div class="ldot"></div>
               <div class="ldot"></div>
               <div class="ldot"></div>
             </div>
-            <span class="loading-text">fetching events....</span>
+            <span class="loading-text">fetching events...</span>
           </div>
         </div>
       </div>
 
       <footer class="app-footer">
         <span class="footer-text">by Sadrita</span>
-        <span class="footer-heart">&#9829</span>
+        <span class="footer-heart">&#9829;</span>
         <span class="footer-text">Hack Club Events</span>
       </footer>
     </div>
-    
+
     <script>
       let pivotDate = new Date();
       let selectedDate = new Date();
@@ -1067,251 +1067,286 @@
         "October",
         "November",
         "December",
-        ];
-        const MONTHS_LONG = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-          ];
-          const WEEKDAYS_LONG = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            ];
+      ];
+      const MONTHS_SHORT = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const WEEKDAYS_LONG = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
 
-            function zeroPad(n) {
-              return String(n).padStart(2, "0");
-            }
-            function dateKey(d) {
-              return `${d.getFullYear()}-${zeroPad(d.getMonth() + 1)}-${zeroPad(
-                d.getDate()
-                )}`;
-            }
+      function zeroPad(n) {
+        return String(n).padStart(2, "0");
+      }
+      function dateKey(d) {
+        return `${d.getFullYear()}-${zeroPad(d.getMonth() + 1)}-${zeroPad(
+          d.getDate()
+        )}`;
+      }
 
-            function formatTime(iso) {
-              if (!iso || !iso.includes("T")) return "Time TBD";
-              const t = iso.split("T")[1];
-              if (!t) return "Time TBD";
-              const [hh, mm] = t.split(":");
-              const h = parseInt(hh, 10);
-              return `${h % 12 || 12}:${mm} ${h >=12 ? "PM" : "AM"} UTC`;
-            }
+      function formatTime(iso) {
+        if (!iso || !iso.includes("T")) return "Time TBD";
+        const t = iso.split("T")[1];
+        if (!t) return "Time TBD";
+        const [hh, mm] = t.split(":");
+        const h = parseInt(hh, 10);
+        return `${h % 12 || 12}:${mm} ${h >= 12 ? "PM" : "AM"} UTC`;
+      }
 
-            function formatHeading(d) {
-              const tk = dateKey(new Date());
-              const sk = dateKey(d);
-              const prefix = sk === tk ? "Today \u2014 " : "";
-              return `${prefix}${WEEKDAYS_LONG[d.getDay()]}, ${
-              MONTHS_LONG[d.getMonth()]
-              } ${d.getDate()}, ${d.getFullYear()}`;
-            }
+      function formatHeading(d) {
+        const tk = dateKey(new Date());
+        const sk = dateKey(d);
+        const prefix = sk === tk ? "Today \u2014 " : "";
+        return `${prefix}${WEEKDAYS_LONG[d.getDay()]}, ${
+          MONTHS_LONG[d.getMonth()]
+        } ${d.getDate()}, ${d.getFullYear()}`;
+      }
 
-            function cleanDesc(text) {
-              if (!text) return "";
-              return text
-                .replace(/\[([^\]]+)\([^)]+\)/g, "$1")
-                .replace(/!\[([^]]*\([^])+\))/g, "")
-                .replace(/\*\*([^*]+)\*\*/g, "$1")
-                .replace(/\*[^*]+)\*/g, "$1")
-                .replace(/`([^`]+)`/g, "$1")
-                .replace(/#+\s/g, "")
-                .replace(/\n{3,}/g, "\n\n")
-                .trim();
-            }
+      function cleanDesc(text) {
+        if (!text) return "";
+        return text
+          .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+          .replace(/!\[([^\]]*)\]\([^)]+\)/g, "")
+          .replace(/\*\*([^*]+)\*\*/g, "$1")
+          .replace(/\*([^*]+)\*/g, "$1")
+          .replace(/`([^`]+)`/g, "$1")
+          .replace(/#+\s/g, "")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+      }
 
-            function initTheme() {
-              const saved = localStorage.getItem("hackdate_theme") || "light";
-              applyTheme(saved);
-            }
-            
-            function applyTheme(theme) {
-              document.documentElement.setAttribute("data-theme", theme);
-              document.getElementById("iconSun").style.display =
-                theme === "dark" ? "block" : "none";
-              document.getElementById("iconMoon").style.display =
-                theme === "dark" ? "none" : "block"
-            }
+      function initTheme() {
+        const saved = localStorage.getItem("hackdate_theme") || "light";
+        applyTheme(saved);
+      }
 
-            function toggleTheme() {
-              const cur = document.documentElement.getAttribute("data-theme");
-              const next = cur === "dark" ? "light" : "dark";
-              localStorage.setItem("hackdate_theme", next);
-              applyTheme(next);
-            }
+      function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        document.getElementById("iconSun").style.display =
+          theme === "dark" ? "block" : "none";
+        document.getElementById("iconMoon").style.display =
+          theme === "dark" ? "none" : "block";
+      }
 
-            function shiftMonth(dir) {
-              pivotDate = new Date(
-                pivotDate.getFullYear(),
-                pivotDate.getMonth() + dir,
-                1
-              );
-              renderGrid();
-            }
+      function toggleTheme() {
+        const cur = document.documentElement.getAttribute("data-theme");
+        const next = cur === "dark" ? "light" : "dark";
+        localStorage.setItem("hackdate_theme", next);
+        applyTheme(next);
+      }
 
-            function goToday() {
-              pivotDate = new Date();
-              selectedDate = new Date();
+      function shiftMonth(dir) {
+        pivotDate = new Date(
+          pivotDate.getFullYear(),
+          pivotDate.getMonth() + dir,
+          1
+        );
+        renderGrid();
+      }
+
+      function goToday() {
+        pivotDate = new Date();
+        selectedDate = new Date();
+        renderAll();
+      }
+
+      function openPicker() {
+        pickerYear = pivotDate.getFullYear();
+        renderPickerMonths();
+        document.getElementById("pickerOverlay").classList.add("open");
+      }
+
+      function closePicker() {
+        document.getElementById("pickerOverlay").classList.remove("open");
+      }
+
+      function renderPickerMonths() {
+        document.getElementById("pickerYearLabel").textContent = pickerYear;
+        const grid = document.getElementById("pickerMonthsGrid");
+        grid.innerHTML = "";
+        const activeMo = pivotDate.getMonth();
+        const activeYr = pivotDate.getFullYear();
+        MONTHS_SHORT.forEach((name, i) => {
+          const btn = document.createElement("button");
+          btn.classList.add("picker-month-btn");
+          if (pickerYear === activeYr && i === activeMo)
+            btn.classList.add("active-month");
+          btn.textContent = name;
+          btn.addEventListener("click", () => {
+            pivotDate = new Date(pickerYear, i, 1);
+            renderGrid();
+            closePicker();
+          });
+          grid.appendChild(btn);
+        });
+      }
+
+      async function fetchEvents() {
+        try {
+          const res = await fetch(API);
+          if (!res.ok) throw new Error();
+          allEvents = await res.json();
+          buildMap();
+          renderAll();
+        } catch (e) {
+          showError();
+        }
+      }
+
+      function buildMap() {
+        eventsMap = {};
+        allEvents.forEach((ev) => {
+          if (!ev.start) return;
+          const k = ev.start.split("T")[0];
+          if (!eventsMap[k]) eventsMap[k] = [];
+          eventsMap[k].push(ev);
+        });
+      }
+
+      function renderAll() {
+        renderGrid();
+        renderFeed();
+      }
+
+      function renderGrid() {
+        const grid = document.getElementById("daysGrid");
+        grid.innerHTML = "";
+        const yr = pivotDate.getFullYear();
+        const mo = pivotDate.getMonth();
+        document.getElementById(
+          "monthLabel"
+        ).textContent = `${MONTHS_LONG[mo]} ${yr}`;
+        const firstDow = new Date(yr, mo, 1).getDay();
+        const daysInMo = new Date(yr, mo + 1, 0).getDate();
+        const prevDays = new Date(yr, mo, 0).getDate();
+        const todayKey = dateKey(new Date());
+        const selKey = dateKey(selectedDate);
+
+        for (let i = 0; i < 35; i++) {
+          const cell = document.createElement("div");
+          cell.classList.add("day-cell");
+          let cellDate,
+            dayNum,
+            isCurrent = false;
+
+          if (i < firstDow) {
+            dayNum = prevDays - (firstDow - i - 1);
+            cell.classList.add("other-month");
+            cellDate = new Date(yr, mo - 1, dayNum);
+          } else if (i - firstDow >= daysInMo) {
+            dayNum = i - firstDow - daysInMo + 1;
+            cell.classList.add("other-month");
+            cellDate = new Date(yr, mo + 1, dayNum);
+          } else {
+            dayNum = i - firstDow + 1;
+            cellDate = new Date(yr, mo, dayNum);
+            isCurrent = true;
+            const k = dateKey(cellDate);
+            if (k === todayKey) cell.classList.add("today");
+            if (k === selKey) cell.classList.add("selected");
+          }
+
+          const span = document.createElement("span");
+          span.classList.add("day-num");
+          span.textContent = dayNum;
+          cell.appendChild(span);
+
+          if (isCurrent) {
+            const k = dateKey(cellDate);
+            const dayEvs = eventsMap[k];
+            if (dayEvs && dayEvs.length > 0) {
+              const dr = document.createElement("div");
+              dr.classList.add("dots-row");
+              dayEvs.slice(0, 3).forEach((ev) => {
+                const d = document.createElement("div");
+                d.classList.add("dot", ev.ama ? "ama" : "regular");
+                dr.appendChild(d);
+              });
+              cell.appendChild(dr);
+            }
+            const cap = new Date(cellDate);
+            cell.addEventListener("click", () => {
+              selectedDate = cap;
               renderAll();
-            }
+            });
+          }
 
-            function openPicker() {
-              pickerYear = pivotDate.getFullYear();
-              renderPickerMonths();
-              document.getElementById("pickerOverlay").classList.add("open");
-            }
+          grid.appendChild(cell);
+        }
+      }
 
-            function closePicker() {
-              document.getElementById("pickerOverlay").classList.remove("open");
-            }
+      function renderFeed() {
+        const list = document.getElementById("eventsList");
+        const lbl = document.getElementById("feedDateLabel");
+        const pill = document.getElementById("eventCountPill");
+        lbl.textContent = formatHeading(selectedDate);
+        const k = dateKey(selectedDate);
+        const evs = eventsMap[k] || [];
 
-            function renderPickerMonths() {
-              document.getElementById("pickerYearLabel").textContent = pickerYear;
-              const grid = document.getElementById("pickerMonthsGrid");
-              grid.innerHTML = "";
-              const activeMo = pivotDate.getMonth();
-              const activeYr = pivotDate.getFullYear();
-              MONTHS_SHORT.forEach((namee, i) => {
-                const btn = document.createElement("button");
-                btn.classList.add("picker-month-btn");
-                if (pickerYear === activeYr && i === activeMo)
-                  btn.classList.add("active-month");
-                btn.textContent = name;
-                btn.addEventListener("click", () => {
-                  pivotDate = new Date(pickerYear, i, 1);
-                  renderGrid();
-                  closePicker();
-                });
-                grid.appendChild(btn)  
-              });
-            }
+        if (evs.length > 0) {
+          pill.style.display = "block";
+          pill.textContent = `${evs.length} event${
+            evs.length !== 1 ? "s" : ""
+          }`;
+        } else {
+          pill.style.display = "none";
+        }
 
-            async function fetchEvents() {
-              try {
-                const res = await fetch(API);
-                if (!res.ok) throw new Erroe();
-                allEvents = await res.json();
-                buildMap();
-                renderAll();
-              } catch (e) {
-                showError();
-              }
-            }
+        list.innerHTML = "";
+        
+        if (evs.length ===0) {
+          const todayKey2 = dateKey(new Date());
+          const selKey2 = dateKey(selectedDate);
+          list.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">
+              <svg xmlns="https://www.w3.org/200/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="12" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="empty-title">${
+              todayKey2 === selKey2 ? "No events today" : "Nothing scheduled"
+            }</div>
+            <div class="empty-body">No Hack Club events on this day. Tap another date to explore.</div>
+          </div>`;
+            return;
+        }
 
-            function buildMap() {
-              eventsMap = ();
-              allEvents.forEach((ev) => {
-                if (!ev.start) return;
-                const k = ev.start.split("T")[0];
-                if (!eventsMap[k]) eventsMap[k] = [];
-                eventsMap[k].puch(ev)
-              });
-            }
+        const todayKey3 = dateKey(new Date());
+        const selKey3 = dateKey(selectedDate);
+        if (todayKey3 === selKey3) {
+          const bar = document.createElement("div");
+          bar.classList.add("today-bar");
+          bar.innerHTML = `<svg xlmns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><svg>Today`;
+          list.appendChild(bar);  
+        }
 
-            function renderAll() {
-              renderGrid();
-              renderFeed();
-            }
+        evs.forEach((ev, idx) => {
+          const card = document.createElement("div");
+          card.classList.add("event-card");
+          card.style.animationDelay = `${idx * 0.05}`;
 
-            function renderGrid() {
-              const grid = document.getElementById("daysGrid");
-              grid.innerHTML = "";
-              const yr = pivotDate.getElementById("daysGrid");
-              const mo = pivotDate.getMonth();
-              document.getElementById(
-                "monthLabel"
-              ).textContent = `${MONTHS_LONG[mo]} ${yr}`;
-              const firstDow = new Date(yr, mo, 1).getDay();
-              const daysInMO = new Date(yr, mo + 1, 0).getDate();
-              const prevDays = dateKey(new Date());
-              const todayKey = dateKey(new Date());
-              const selKey = dateKey(selectedDate);
+          
+        })
+      }
 
-              for (let i = 0; i < 35; i++) {
-                const cell = document.createElement("div");
-                cell.classList.add("day-cell");
-                let cellDate,
-                  dayNum,
-                  isCurrent = false;
-
-                if (i < firstDow) {
-                  dayNum = prevDays - (firstDow - i - 1);
-                  cell.classList.add("other-months");
-                  cellDate = mew Date(yr, mo - 1, dayNum);
-                } else if (i - firstDow >= daysInMO) {
-                  dayNum = i - firstDow - daysInMO + 1;
-                  cell.classList.add("other-month");
-                  cellDate = new Date (yr, mo, dayNum);
-                } else if {
-                  dayNum = i - firstDow + 1;
-                  cellDate = new Date(yr, mo, dayNum);
-                  isCurrent = true;
-                  const k = dateKey(cellDate);
-                  if (k === todayKey) cell.classList.add("today");
-                  if (k === selKey) cell.classList.add(selected);
-                }
-
-                const span = document.createElement("span");
-                span.classList.add("day-num");
-                span.textContent = dayNum;
-                cell.appendChild(span);
-
-                if (isCurrent) {
-                  const k = dateKey(cellDate);
-                  const dayEvs = eventsMap[k];
-                  if (dayEvs && dayEvs.length > 0) {
-                    const dr = document.createElement("div");
-                    dr.classList.add("dots-row");
-                    dayEvs.slice(0, 3).forEach((ev) => {
-                      const d = document.createElement("div");
-                      d.classList.add("dot", ev.ama ? "ama" : "regular");
-                      dr.appendChild(d);
-                    });
-                    cell.appendChild(dr);
-                  }
-                  const cap = new Date(cellDate);
-                  cell.addEventListener("click", () => {
-                    selectedDate = cap;
-                    renderAll();
-                  });
-                }
-
-                grid.appendChild(cell);
-              }
-            }
-
-            function renderFeed() {
-              const list = document.getElementById("eventsList");
-              const lbl = document.getElementById("feedDateLabel");
-              const pill = document.getElementById("eventCountPill");
-              lbl.textContent = formatHeading(selectedDate);
-              const k = dateKey(selectedDate);
-              const evs = eventsMap[k] || [];
-
-              if (evs.length > 0) {
-                pill.style.display ="block";
-                pill.textContent = `${evs.lenght} events${
-                evs.length !== 1 ? "s" : ""
-                }`;
-              } else {
-                pill.style.display = "none";
-              }
-
-              list.innerHTML = "";
-              
-            }
           </script>
   </body>
 </html>
