@@ -175,6 +175,6 @@ Contributions are what make the open-source community such an amazing place to l
 4. **Push** to the Branch (`git push origin feature/AmazingFeature`)
 5. **Open a Pull Request**
 
-I will gladly review your changes and merge them into the project. Thank you for helping make this website even better! ✨
+I will gladly review your changes and merge them into the project. Thank you for helping make this app even better! 
 
 <a href="https://hackclub.com/"><img style="position: absolute; top: 0; left: 10px; border: 0; width: 256px; z-index: 999;" src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club"/></a>
