@@ -1343,8 +1343,68 @@
           card.classList.add("event-card");
           card.style.animationDelay = `${idx * 0.05}`;
 
-          
-        })
+          const desc = cleanDesc(ev.desc);
+          const timeStr = formatTime(ev.start);
+          const isAma = !!ev.ama;
+          const avatarSrc = ev.avatar || ev.amaAvatar || "";
+
+          let avatarHTML;
+          if (avatarSrc) {
+            avatarHTML = ``;
+          } else {
+            avatarHTML = ``;
+          }
+
+          const badge = isAma
+            ? `<span class="ptag ama">AMA</span>`
+            : `<span class="ptag ev">Event</span>`;
+
+            let actionsHTML = "";
+            if (ev.cal || ev.youtube) {
+              actionsHTML = `<div class="card-aactions">`;
+                if (ev.cal)
+                  actionsHTML += ``;
+                  if (ev.youtube)
+                    actionsHTML += ``;
+                  actionsHTML += '</div>'  
+            }
+
+            card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-top">
+            ${avatarHTML}
+            <div class="card-title-col">
+              <div class="card-event-name">${ev.title || "Untitled Event"}</div>
+              <div class="card-leader-row">    
+                <span class="card-leader-name">${ev.leader || "Hack Club"}</span>
+                <span class="card-sep=dot"></span>
+                <div class="card-time-chip">
+                  <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${timeStr}
+                </div>
+              </div>
+            </div>
+          </div>
+          ${desc ? `<div class="card-desc">${desc}</div>` : ""}
+          <div class="card-tags-row">${badge}</div>
+          ${actionsHTML}  
+        </div>`;
+        
+        list.appendChild(card);
+        });
+      }
+
+      function showError() {
+        document.getElementById("eventsList").innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon" style="background-color:var(--accent-bg);">
+        <svg xmlns="https://www.w3.org./2000/svg" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <div class="empty-title">Failed to load events</div>
+      <div class="empty-body">Could not reach the Hack Club events API. Check your connection.</div>
+    </div>`;        
       }
 
           </script>
