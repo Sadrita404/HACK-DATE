@@ -1407,6 +1407,40 @@
     </div>`;        
       }
 
-          </script>
+      document.addEventListener("DOMContentLoaded", () => {
+        initTheme();
+        document
+          .getElementById("themeBtn")
+          .addEventListener("click", toggleTheme);
+        document
+          .getElementById("prevBtn")
+          .addEventListener("click", () => shiftMonth(-1));
+        document
+          .getElementById("nexBtn")
+          .addEventListener("click", () => shiftMonth(1));
+        document.getElementById("todayBtn").addEventListener("click", goToday);
+        document
+          .getElementById("monthPickerTrigger")
+          .addEventListener("click", openPicker);
+        document
+          .getElementById("pickerClose")
+          .addEventListener("click", closePicker);  
+        document 
+          .getElementById("pickerOverlay")
+          .addEventListener("click", (e) => {
+            if (e.target === document.getElementById("pickerOverlay"))
+              closePicker();
+          });
+        document.getElementById("yearPrevBtn").addEventListener("click", () => {
+          pickerYear--;
+          renderPickerMonths();
+        });
+        document.getElementById(yearNextBtn).addEventListener("click", () => {
+          pickerYear++;
+          renderPickerMonths();
+        })
+        fetchEvents();
+      });
+     </script>
   </body>
 </html>
