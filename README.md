@@ -64,9 +64,9 @@ Made By - Sadrita in [Excalidraw](https://excalidraw.com/)
 
 ##  Features
 
-* **Complete Archive:** Explore every single Hack Club event ever hosted, all in one place.
-* **Live Schedules:** Instantly view active dates and upcoming event timelines.
-* **Calendar Integration:** Seamlessly add events directly to your personal Google Calendar with a single click.
+*  You can saw Hack Club event ever hosted.
+* You can see upcoming events and there timelines.
+* You can add events directly to your Google Calendar.
 
 </div>
 
