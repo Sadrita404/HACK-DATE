@@ -39,6 +39,7 @@
 | :-- | :-- |
 |Author | Sadrita Neogi|
 | APP APK FILE | [APK FILE](https://github.com/Sadrita404/HACK-DATE/releases/tag/V1)|
+| Official Website | [LINK](https://hack-date-official.vercel.app/)
 
 ---
 ## What is Hack Date ?
