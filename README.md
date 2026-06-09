@@ -161,6 +161,18 @@ A simple JSON API to events on this site.
   </table>
 </div>
 
+---
+
+<div align="center">
+  <h3>POSTER</h3>
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/user-attachments/assets/2a80183b-e0f7-4a70-b6a2-90b53c03a6dd" width="397" height="561" alt="Poster Design">
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
