@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack Date — Dynamic Hack Club Event Calendar</title>
+    
+    <link rel="icon" type="image/png" href="https://github.com/user-attachments/assets/f9c2cf01-a36c-4806-99da-35e57dd380d9">
+    
+    <style>
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #f8fafc;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes revealScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes flagWave {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Hack Club Banner Flag Positioning */
+        .hc-flag {
+            position: absolute;
+            top: 0;
+            left: 24px;
+            border: 0;
+            width: 160px;
+            z-index: 999;
+            transform-origin: top center;
+            animation: flagWave 4s ease-in-out infinite;
+            transition: transform 0.2s ease;
+        }
+        .hc-flag:hover {
+            animation-play-state: paused;
+            transform: scale(1.05) translateY(4px);
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            padding-left: 180px; 
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #333333;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .brand:hover {
+            transform: translateX(2px);
+        }
+        .brand img {
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 24px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        nav a:hover {
+            color: #ec3750; /* Hack Club Red */
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ec3750;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #ffffff;
+            padding: 80px 0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-content {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+        .hero-content h1 {
+            font-size: 2.75rem;
+            line-height: 1.2;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+        .hero-content p {
+            font-size: 1.125rem;
+            color: #475569;
+            margin-bottom: 32px;
+        }
+        .badge-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .badge-group img {
+            transition: transform 0.2s ease;
+        }
+        .badge-group img:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Action Buttons */
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.15);
+        }
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        .btn-download {
+            background-color: #ec3750;
+            color: #ffffff;
+        }
+        .btn-download:hover {
+            background-color: #d1223a;
+        }
+        .btn-github {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: 2px solid #0f172a;
+        }
+        .btn-github:hover {
+            background-color: #1e293b;
+            border-color: #1e293b;
+        }
+
+        /* Hero Media Frame */
+        .hero-visual {
+            animation: revealScale 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+        .hero-visual video {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin: 0 auto;
+            border: 8px solid #0f172a;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-visual video:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Entry Animations (Triggered via class) */
+        section {
+            padding: 80px 0;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 48px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .feature-card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.05);
+        }
+        .feature-card h3 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .feature-card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            background-color: #ffffff;
+            border-top: 2px solid #e2e8f0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            justify-items: center;
+        }
+        .screenshot-grid img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .screenshot-grid img:hover {
+            transform: scale(1.04) translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15);
+        }
+
+        /* Technical Specs & API Details */
+        .api-section {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .api-section .section-title {
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+        .api-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+        .api-subtitle a {
+            color: #3ddc84;
+            text-decoration: none;
+            border-bottom: 1px dashed #3ddc84;
+        }
+        .api-subtitle a:hover {
+            color: #5effa3;
+        }
+        .api-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .api-info h3 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #3ddc84;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .api-info ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+        .api-info li {
+            margin-bottom: 12px;
+            background: #1e293b;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ec3750;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .api-info li:hover {
+            transform: translateX(4px);
+            background-color: #24334a;
+        }
+        .api-info li a {
+            color: #3ddc84;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .api-info li a:hover {
+            text-decoration: underline;
+        }
+        .api-info li span {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-align: right;
+        }
+        .api-info code, .api-info p code {
+            font-family: monospace;
+            color: #f43f5e;
+            background: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Schema Tabs View */
+        .schema-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .tab-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 8px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            color: #ffffff;
+            background-color: #1e293b;
+        }
+        .tab-btn.active {
+            color: #ffffff;
+            background-color: #ec3750;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .schema-notes {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        .schema-notes ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-top: 6px;
+        }
+        .schema-notes li {
+            background: transparent;
+            padding: 0;
+            border: none;
+            margin-bottom: 4px;
+            display: list-item;
+            color: #94a3b8;
+        }
+        .schema-notes li:hover {
+            transform: none;
+            background: transparent;
+        }
+
+        pre {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            font-size: 0.85rem;
+            max-height: 380px;
+            transition: border-color 0.3s ease;
+        }
+        pre:hover {
+            border-color: #475569;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            color: #e2e8f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #ffffff;
+            padding: 40px 0;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        footer a {
+            color: #ec3750;
+            text-decoration: none;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 868px) {
+            .nav-wrapper {
+                padding-left: 24px;
+                flex-direction: column;
+                height: auto;
+                padding-top: 64px;
+                padding-bottom: 16px;
+                gap: 12px;
+            }
+            .hc-flag {
+                width: 120px;
+                left: 12px;
+            }
+            nav a {
+                margin: 0 12px;
+            }
+            .hero-grid, .features-grid, .api-grid, .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .badge-group, .cta-actions {
+                justify-content: center;
+            }
+            .hero-visual video {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://hackclub.com/" target="_blank">
+        <img class="hc-flag" src="https://assets.hackclub.com/flag-orpheus-left.svg" alt="Hack Club"/>
+    </a>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand">
+                <img src="https://github.com/user-attachments/assets/f9c2cf01-a36c-4806-99da-35e57dd380d9" width="40" height="40" alt="Hack Date App Icon">
+                Hack Date
+            </a>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#api">API Integration</a>
+            </nav>
+        </div>
+    </header>
+
+   <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge-group">
+                    <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat&logo=android&logoColor=white" alt="Android">
+                    <img src="https://img.shields.io/badge/Language-HTML5-E34F26?style=flat&logo=html5&logoColor=white" alt="HTML5">
+                    <img src="https://img.shields.io/badge/Type-Web__Wrapper-blueviolet?style=flat" alt="Web Wrapper">
+                    <img src="https://img.shields.io/badge/Open__Source-Yes-success?style=flat" alt="Open Source">
+                </div>
+                <h1>Light, fast, and dynamic Web Calendar</h1>
+                <p>Hack Date is an open-source, high-performance Android web-wrapper app built explicitly to track and schedule Hack Club events. Monitor live timelines, organize your schedule, and access community gatherings straight from your mobile environment.</p>
+                
+                <div class="cta-actions">
+                    <a href="https://github.com/Sadrita404/HACK-DATE/releases/tag/V1" class="btn btn-download" target="_blank">Download APK File</a>
+                    <a href="https://github.com/Sadrita404/HACK-DATE" class="btn btn-github" target="_blank" style="gap: 10px;">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" alt="GitHub Logo" width="20" height="20" style="box-shadow: none; border-radius: 0;">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <video src="https://github.com/user-attachments/assets/59b748dd-6175-437b-978b-fba7c2543db8" controls autoplay muted loop></video>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">App Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Event Archive</h3>
+                    <p>Easily browse through a comprehensive timeline of every single Hack Club event ever hosted historically.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Upcoming Timelines</h3>
+                    <p>Stay updated ahead of time. Monitor upcoming events scheduled across the community directly instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Calendar Integration</h3>
+                    <p>Never miss a session. Export and add events directly to your personal Google Calendar with a single click.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="screenshots animate-on-scroll" id="screenshots">
+        <div class="container">
+            <h2 class="section-title">Application Screenshots</h2>
+            <div class="screenshot-grid">
+                <img src="https://github.com/user-attachments/assets/bdd168f0-0d75-4723-b4f3-7ecf8e846749" alt="App Screen 1">
+                <img src="https://github.com/user-attachments/assets/47e33347-c2bc-4aeb-80d9-0441e02df630" alt="App Screen 2">
+                <img src="https://github.com/user-attachments/assets/24ebb0c5-117d-4cc2-9aea-35c5a1297f43" alt="App Screen 3">
+            </div>
+        </div>
+    </section>
+
+    <section class="api-section animate-on-scroll" id="api">
+        <div class="container">
+            <h2 class="section-title">Data & API Setup</h2>
+            <p class="api-subtitle">A simple JSON API delivering real-time logs. For structural details, view the official <a href="https://events.hackclub.com/data/" target="_blank">Hack Club API Documentation</a>.</p>
+            
+            <div class="api-grid">
+                <div class="api-info">
+                    <p>The application updates interfaces sequentially by mapping queries onto standardized HTTP endpoints.</p>
+                    
+                    <h3>Core API Endpoints</h3>
+                    <ul>
+                        <li>
+                            <a href="https://events.hackclub.com/api/events/upcoming" target="_blank">/api/events/upcoming</a>
+                            <span>All active upcoming events</span>
+                        </li>
+                        <li>
+                            <a href="https://events.hackclub.com/api/events/upcoming-monthly" target="_blank">/api/events/upcoming-monthly</a>
+                            <span>Upcoming logs sorted by month</span>
+                        </li>
+                        <li>
+                            <a href="https://events.hackclub.com/api/events/all" target="_blank">/api/events/all</a>
+                            <span>Complete historical index</span>
+                        </li>
+                        <li>
+                            <a href="https://events.hackclub.com/api/events/all-monthly" target="_blank">/api/events/all-monthly</a>
+                            <span>Historical logs sorted by month</span>
+                        </li>
+                        <li>
+                            <a href="https://events.hackclub.com/api/amas" target="_blank">/api/amas</a>
+                            <span>Dedicated AMA archive logs</span>
+                        </li>
+                    </ul>
+
+                    <h3>Parameter Constraints & Filtering</h3>
+                    <p>Isolate categories using the custom query parameters via <code>?tags=</code> mutation. Append continuous strings broken by standard commas:</p>
+                    <ul style="margin-top: 12px;">
+                        <li style="border-left-color: blueviolet;">
+                            <a href="https://events.hackclub.com/api/events/upcoming/?tags=stardance" target="_blank">/api/events/upcoming?tags=stardance</a>
+                            <span>Single classification query</span>
+                        </li>
+                        <li style="border-left-color: blueviolet;">
+                            <a href="https://events.hackclub.com/api/events/all/?tags=ama%2Cworkshop" target="_blank">/api/events/all?tags=ama,workshop</a>
+                            <span>Multi-tag compound filter</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="schema-container">
+                    <div class="tab-header">
+                        <button class="tab-btn active" onclick="switchTab(event, 'regular-schema')">Regular Event Schema</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'ama-schema')">AMA Schema</button>
+                    </div>
+
+                    <div id="regular-schema" class="tab-content active">
+<pre><code>{
+  "id": "8a20db4e-35e8-47a3-a075-d392173a86d9",
+  "slug": "code-in-the-dark",
+  "title": "Code in the Dark",
+  "desc": "On a live Zoom call, we're going to…",
+  "leader": "@amogh",
+  "cal": "https://www.google.com/calendar/render?action=TEMPLATE&…",
+  "start": "2020-04-02T00:00:00.000Z",
+  "end": "2020-04-02T01:00:00.000Z",
+  "youtube": null,
+  "ama": false,
+  "amaId": "",
+  "amaAvatar": "",
+  "avatar": "https://…",
+  "tags": ["workshop", "social"]
+}</code></pre>
+                    </div>
+
+                    <div id="ama-schema" class="tab-content">
+<pre><code>{
+  "id": "4f616602-d015-4383-9511-04a890396655",
+  "slug": "ama-with-guillermo-rauch",
+  "title": "AMA with Guillermo Rauch",
+  "desc": "Guillermo is the founder of…",
+  "leader": "@lachlanjc",
+  "cal": "https://www.google.com/calendar/render?action=TEMPLATE&…",
+  "start": "2020-05-14T20:00:00.000Z",
+  "end": "2020-05-14T21:00:00.000Z",
+  "youtube": "https://youtu.be/PXlDzMMZydk",
+  "ama": true,
+  "amaId": "recx1wwapHrBPZ3Mq",
+  "amaAvatar": "https://dl.airtable.com/.attachmentThumbnails/…",
+  "avatar": "https://dl.airtable.com/.attachmentThumbnails/…",
+  "tags": ["ama"]
+}</code></pre>
+                    </div>
+
+                    <div class="schema-notes">
+                        <strong>Structural Guidelines:</strong>
+                        <ul>
+                            <li>Primary unique identifiers (<code>id</code>) conform strictly to standard UUID variants.</li>
+                            <li>Description metrics (<code>desc</code>) utilize rich text rendering configured via Markdown formats.</li>
+                            <li>The <code>tags</code> property returns an explicit array containing standard string variables.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>Hack Date</strong> — Developed by <strong>Sadrita Neogi</strong></p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Project licensed under Apache 2.0. Open-source asset built for the <a href="https://hackclub.com/" target="_blank">Hack Club</a> community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching utility logic for structural schemas
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Intersection Observer logic for scrolling animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.12
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
